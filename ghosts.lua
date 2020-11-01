@@ -1,5 +1,9 @@
-
--- original pico-8 code: https://twitter.com/Alexis_Lessard/status/1322164958008905728
+-- ghosts.
+--
+-- @Alexis_Lessard
+-- https://twitter.com/Alexis_Lessard/status/1322164958008905728?s=20
+--
+-- Ported by @eigenbahn
 
 
 include('pico-8/lib/p8')
