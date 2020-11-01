@@ -26,7 +26,7 @@ To compare them:
 
 Their display APIs are pretty close to one another.
 
-On the contrary, pico-8 trigonometric functions behave quite deifferently from the standard Lua `math` lib.
+On the contrary, _pico-8's_ trigonometric functions behave quite deifferently from the standard Lua `math` lib.
 
 
 ## Usage
@@ -44,16 +44,16 @@ A concrete example is given with [ghosts.lua](ghosts.lua) ([original tweetcart](
 
 #### print
 
-_pico-8_'s `print` allows printing on the screen.
+_pico-8's_ `print` allows printing on the screen.
 
 _norns_ is not happy with having the standard `print` function redefined.
 
-That's why _pico-8_'s version got renamed `p8print`.
+That's why _pico-8's_ version got renamed `p8print`.
 
 
 #### Special _pico-8_ Lua syntax
 
-_pico-8_'s Lua differs a bit from standard Lua.
+_pico-8's_ Lua differs a bit from standard Lua.
 
 It notably provides additional constructs such as `+=` and `-=` to increase / decrease values. These instructions should be converted for _norns_ to interpret them.
 
