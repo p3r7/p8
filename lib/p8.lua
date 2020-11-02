@@ -1,7 +1,7 @@
 
 
 -- -------------------------------------------------------------------------
--- STATE
+-- STATE & MEMORY
 
 curr_color = 6
 
@@ -17,8 +17,8 @@ function set_current_line_endpoints(x, y)
 end
 
 function invalidate_current_line_endpoints()
-  curr_line_endpoint_x = nil
-  curr_line_endpoint_y = nil
+ curr_line_endpoint_x = nil
+ curr_line_endpoint_y = nil
 end
 
 function peek(addr)
@@ -38,68 +38,15 @@ function poke(addr, val)
 end
 
 
--- -- -------------------------------------------------------------------------
--- -- BASIC
-
-function cls()
- cursor(0, 0)
- screen.clear()
-end
-
-function flip()
- screen.update()
-end
-
-
--- -------------------------------------------------------------------------
--- MATH: BINARY OPS
-
-function band(x, y)
-  return x & y
-end
-
-function bnot(x)
-  return ~x
-end
-
-function bor(x, y)
-  return x | y
-end
-
-function bxor(x, y)
-  return x ~ y
-end
-
-function shl(num, bits)
-  return num << bits
-end
-
-function shr(num, bits)
-  return num >> bits
-end
-
-
--- -------------------------------------------------------------------------
--- MATH: RANDOMNESS
-
-function rnd(x)
-  return math.random(x)
-end
-
-function srand(x)
-  return math.randomseed(x)
-end
-
-
 -- -------------------------------------------------------------------------
 -- MATH: BASICS
 
 function sgn(x)
-  if x < 0 then
-    return -1
-  else
-    return 1
-  end
+ if x < 0 then
+  return -1
+ else
+  return 1
+ end
 end
 
 function mid(x, y, z)
@@ -109,28 +56,68 @@ function mid(x, y, z)
 end
 
 function min(x, y)
-  return math.min(x, y)
+ return math.min(x, y)
 end
 
 function max(x, y)
-  return math.max(x, y)
+ return math.max(x, y)
 end
 
 function abs(x)
-  return math.abs(x)
+ return math.abs(x)
 end
 
 function sqrt(x)
-  return math.sqrt(x)
+ return math.sqrt(x)
 end
 
 function flr(x)
-  return math.floor(x)
+ return math.floor(x)
 end
 
 
 -- -------------------------------------------------------------------------
--- MATH: TIRGONOMETRIC
+-- MATH: BINARY OPS
+
+function band(x, y)
+ return x & y
+end
+
+function bnot(x)
+ return ~x
+end
+
+function bor(x, y)
+ return x | y
+end
+
+function bxor(x, y)
+ return x ~ y
+end
+
+function shl(num, bits)
+ return num << bits
+end
+
+function shr(num, bits)
+ return num >> bits
+end
+
+
+-- -------------------------------------------------------------------------
+-- MATH: RANDOMNESS
+
+function rnd(x)
+ return math.random(x)
+end
+
+function srand(x)
+ return math.randomseed(x)
+end
+
+
+-- -------------------------------------------------------------------------
+-- MATH: TRIGONOMETRY
 
 function cos(x)
  return math.cos(math.rad(x * 360))
@@ -168,8 +155,21 @@ end
 -- end
 
 
--- -- -------------------------------------------------------------------------
--- -- COLOR
+-- -------------------------------------------------------------------------
+-- SCREEN: BASICS
+
+function cls()
+ cursor(0, 0)
+ screen.clear()
+end
+
+function flip()
+ screen.update()
+end
+
+
+-- -------------------------------------------------------------------------
+-- SCREEN: COLORS
 
 palette_indices = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
 palette = {
@@ -231,8 +231,9 @@ function rgb_to_greyscale(rgb)
  return flr(grey_16)
 end
 
--- -- -------------------------------------------------------------------------
--- TEXT
+
+-- -------------------------------------------------------------------------
+-- SCREEN: TEXT
 
 function cursor(x, y, col)
  color_maybe(col)
@@ -259,8 +260,8 @@ function p8print(str, x, y, col)
 end
 
 
--- -- -------------------------------------------------------------------------
--- -- SHAPES
+-- -------------------------------------------------------------------------
+-- SCREEN: SHAPES
 
 function pset(x, y, col)
  color_maybe(col)
@@ -318,7 +319,6 @@ function circfill(x, y, r, col)
  circ_impl(x, y, r, col)
  screen.fill()
 end
-
 
 function rect(x0, y0, x1, y1, col)
  color_maybe(col)
