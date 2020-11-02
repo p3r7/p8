@@ -6,7 +6,7 @@
 -- Ported by @eigenbahn
 
 
-include('pico-8/lib/p8')
+include('p8/lib/p8')
 
 function init()
   screen.level(15)
