@@ -212,7 +212,7 @@ secret_palette = {
 }
 
 function color(col)
- curr_color = rgb_to_greyscale(palette[col+1])
+ curr_color = rgb_to_greyscale(palette[(col % 16)+1])
  screen.level(curr_color)
 end
 
