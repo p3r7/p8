@@ -125,7 +125,7 @@ function sqrt(x)
 end
 
 function flr(x)
- return math.floor(x)
+  return math.floor(x)
 end
 
 
@@ -232,7 +232,7 @@ function rgb_to_greyscale(rgb)
 end
 
 -- -- -------------------------------------------------------------------------
--- -- TEXT
+-- TEXT
 
 function cursor(x, y, col)
  color_maybe(col)
