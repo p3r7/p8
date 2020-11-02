@@ -11,50 +11,9 @@ curr_cursor_y = 0
 curr_line_endpoint_x = nil
 curr_line_endpoint_y = nil
 
-palette_indices = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
-palette = {
- {   0,   0,   0 }, -- black
- {  29,  43,  83 }, -- dark-blue
- { 126,  37,  83 }, -- dark-purple
- {   0, 135,  81 }, -- dark-green
- { 171,  82,  54 }, -- brown
- {  95,  87,  79 }, -- dark-grey
- { 194, 195, 199 }, -- light-grey
- { 255, 241, 232 }, -- white
- { 255,   0,  77 }, -- red
- { 255, 163,   0 }, -- orange
- { 255, 236,  39 }, -- yellow
- {   0, 228,  54 }, -- green
- {  41, 173, 255 }, -- blue
- { 131, 118, 156 }, -- lavender
- { 255, 119, 168 }, -- pink
- { 255, 204, 170 }, -- light-peach
-}
-
-secret_palette_indices = {128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}
-secret_palette = {
- {  41,  24,  20 }, -- darkest-grey
- {  17,  29,  53 }, -- darker-blue
- {  66,  33,  54 }, -- darker-purple
- {  18,  83,  89 }, -- blue-green
- { 116,  47,  41 }, -- dark-brown
- {  73,  51,  59 }, -- darker-grey
- { 162, 136, 121 }, -- medium-grey
- { 243, 239, 125 }, -- light-yellow
- { 190,  18,  80 }, -- dark-red
- { 255, 108,  36 }, -- dark-orange
- { 168, 231,  46 }, -- light-green
- { 0,   181,  67 }, -- medium-green
- { 6,    90, 181 }, -- medium-blue
- { 117,  70, 101 }, -- mauve
- { 255, 110,  89 }, -- dark peach
- { 255, 157, 129 }, -- peach
-}
-
-
 function set_current_line_endpoints(x, y)
-  curr_line_endpoint_x = x
-  curr_line_endpoint_y = y
+ curr_line_endpoint_x = x
+ curr_line_endpoint_y = y
 end
 
 function invalidate_current_line_endpoints()
@@ -212,8 +171,48 @@ end
 -- -- -------------------------------------------------------------------------
 -- -- COLOR
 
+palette_indices = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
+palette = {
+ {   0,   0,   0 }, -- black          0
+ {  29,  43,  83 }, -- dark-blue      3
+ { 126,  37,  83 }, -- dark-purple    4
+ {   0, 135,  81 }, -- dark-green     4
+ { 171,  82,  54 }, -- brown          6
+ {  95,  87,  79 }, -- dark-grey      5
+ { 194, 195, 199 }, -- light-grey     11
+ { 255, 241, 232 }, -- white          14
+ { 255,   0,  77 }, -- red            6
+ { 255, 163,   0 }, -- orange         8
+ { 255, 236,  39 }, -- yellow         10
+ {   0, 228,  54 }, -- green          5
+ {  41, 173, 255 }, -- blue           9
+ { 131, 118, 156 }, -- lavender       7
+ { 255, 119, 168 }, -- pink           10
+ { 255, 204, 170 }, -- light-peach    12
+}
+
+secret_palette_indices = {128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}
+secret_palette = {
+ {  41,  24,  20 }, -- darkest-grey   1
+ {  17,  29,  53 }, -- darker-blue    1
+ {  66,  33,  54 }, -- darker-purple  3
+ {  18,  83,  89 }, -- blue-green     3
+ { 116,  47,  41 }, -- dark-brown     4
+ {  73,  51,  59 }, -- darker-grey    3
+ { 162, 136, 121 }, -- medium-grey    8
+ { 243, 239, 125 }, -- light-yellow   11
+ { 190,  18,  80 }, -- dark-red       5
+ { 255, 108,  36 }, -- dark-orange    7
+ { 168, 231,  46 }, -- light-green    8
+ { 0,   181,  67 }, -- medium-green   4
+ { 6,    90, 181 }, -- medium-blue    5
+ { 117,  70, 101 }, -- mauve          5
+ { 255, 110,  89 }, -- dark peach     8
+ { 255, 157, 129 }, -- peach          10
+}
+
 function color(col)
- curr_color = col
+ curr_color = rgb_to_greyscale(palette[col+1])
  screen.level(curr_color)
 end
 
@@ -229,7 +228,7 @@ function rgb_to_greyscale(rgb)
  local b = rgb[3]
  local grey_255 = (r + g + b) / 3
  local grey_16 = grey_255 * 15 / 255
- return grey_16
+ return flr(grey_16)
 end
 
 -- -- -------------------------------------------------------------------------
