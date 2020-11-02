@@ -11,6 +11,47 @@ curr_cursor_y = 0
 curr_line_endpoint_x = nil
 curr_line_endpoint_y = nil
 
+palette_indices = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
+palette = {
+ {   0,   0,   0 }, -- black
+ {  29,  43,  83 }, -- dark-blue
+ { 126,  37,  83 }, -- dark-purple
+ {   0, 135,  81 }, -- dark-green
+ { 171,  82,  54 }, -- brown
+ {  95,  87,  79 }, -- dark-grey
+ { 194, 195, 199 }, -- light-grey
+ { 255, 241, 232 }, -- white
+ { 255,   0,  77 }, -- red
+ { 255, 163,   0 }, -- orange
+ { 255, 236,  39 }, -- yellow
+ {   0, 228,  54 }, -- green
+ {  41, 173, 255 }, -- blue
+ { 131, 118, 156 }, -- lavender
+ { 255, 119, 168 }, -- pink
+ { 255, 204, 170 }, -- light-peach
+}
+
+secret_palette_indices = {128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}
+secret_palette = {
+ {  41,  24,  20 }, -- darkest-grey
+ {  17,  29,  53 }, -- darker-blue
+ {  66,  33,  54 }, -- darker-purple
+ {  18,  83,  89 }, -- blue-green
+ { 116,  47,  41 }, -- dark-brown
+ {  73,  51,  59 }, -- darker-grey
+ { 162, 136, 121 }, -- medium-grey
+ { 243, 239, 125 }, -- light-yellow
+ { 190,  18,  80 }, -- dark-red
+ { 255, 108,  36 }, -- dark-orange
+ { 168, 231,  46 }, -- light-green
+ { 0,   181,  67 }, -- medium-green
+ { 6,    90, 181 }, -- medium-blue
+ { 117,  70, 101 }, -- mauve
+ { 255, 110,  89 }, -- dark peach
+ { 255, 157, 129 }, -- peach
+}
+
+
 function set_current_line_endpoints(x, y)
   curr_line_endpoint_x = x
   curr_line_endpoint_y = y
@@ -125,7 +166,7 @@ function sqrt(x)
 end
 
 function flr(x)
-  return math.floor(x)
+ return math.floor(x)
 end
 
 
@@ -182,6 +223,14 @@ function color_maybe(col)
  end
 end
 
+function rgb_to_greyscale(rgb)
+ local r = rgb[1]
+ local g = rgb[2]
+ local b = rgb[3]
+ local grey_255 = (r + g + b) / 3
+ local grey_16 = grey_255 * 15 / 255
+ return grey_16
+end
 
 -- -- -------------------------------------------------------------------------
 -- -- TEXT
