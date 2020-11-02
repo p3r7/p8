@@ -87,8 +87,6 @@ These might get implemented in a very loose way:
 - `fset` / `fget`
 - sprite sheet fns: `sset` / `sget`, `spr`, `sspr`
 
-Current implementation of `color` doesn't handle values above `15` the same way that _pico-8_ does.
-
 Current implementation of `print` (`p8print`) does not handle `\n` and screen scroll on end of framebuffer.
 
 Current implementation of `peek` and `poke` only support interracting with the current color and current text cursor position.
