@@ -2,7 +2,7 @@
 
 Compatibility layer to run [_pico-8_](https://www.lexaloffle.com/pico-8.php) scripts on the [_monome norns_](https://monome.org/docs/norns/).
 
-This is not suitable for running full-fledged carts (with sprites, sound...), targeting instead [_tweetcart_](https://twitter.com/hashtag/tweetcart?lang=en) (code fitting in a tweet).
+This is not suitable for running full-fledged carts (with sprites, sound...), targeting instead [_tweetcarts_](https://twitter.com/hashtag/tweetcart?lang=en) (code fitting in a tweet).
 
 
 ## Why?
