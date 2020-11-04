@@ -314,9 +314,7 @@ function pal(c0, c1, p)
 end
 
 function palt(col, t)
- print("palt - col="..col)
  local col_id = find_in_table(col, default_palette_indices)
- print("palt - col_id="..col_id)
  if not col then
   curr_palette_transparency = default_palette_transparency
  else
