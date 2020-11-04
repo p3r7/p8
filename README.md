@@ -35,6 +35,10 @@ On the contrary, _pico-8's_ trigonometric functions behave quite deifferently fr
 
 ![norns_p8_ghosts](https://www.eigenbahn.com/assets/gif/norns_p8_ghosts.gif)
 
+[manga_effect.lua](manga_effect.lua) ([original tweetcart](https://twitter.com/user/status/1319781601425952768) by [@kadoyan](https://twitter.com/kadoyan)).
+
+![norns_p8_manga-effect](https://www.eigenbahn.com/assets/gif/norns_p8_manga-effect.gif)
+
 [tree.lua](tree.lua) ([original tweetcart](https://twitter.com/user/status/1319781601425952768) by [@Alexis_Lessard](https://twitter.com/Alexis_Lessard)).
 
 ![norns_p8_tree](https://www.eigenbahn.com/assets/gif/norns_p8_tree.gif)
