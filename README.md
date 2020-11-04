@@ -31,9 +31,17 @@ On the contrary, _pico-8's_ trigonometric functions behave quite deifferently fr
 
 ## Examples
 
-[ghosts.lua](ghosts.lua) ([original tweetcart](https://twitter.com/Alexis_Lessard/status/1322164958008905728) by [@Alexis_Lessard](https://twitter.com/Alexis_Lessard)).
+[ghosts.lua](ghosts.lua) ([original tweetcart](https://twitter.com/user/status/1322164958008905728) by [@Alexis_Lessard](https://twitter.com/Alexis_Lessard)).
 
 ![norns_p8_ghosts](https://www.eigenbahn.com/assets/gif/norns_p8_ghosts.gif)
+
+[tree.lua](tree.lua) ([original tweetcart](https://twitter.com/user/status/1319781601425952768) by [@Alexis_Lessard](https://twitter.com/Alexis_Lessard)).
+
+![norns_p8_tree](https://www.eigenbahn.com/assets/gif/norns_p8_tree.gif)
+
+[pumpkin.lua](tree.lua) ([original tweetcart](https://twitter.com/user/status/1322693583623884803) by [@von_rostock](https://twitter.com/von_rostock)).
+
+![norns_p8_pumpkin](https://www.eigenbahn.com/assets/gif/norns_p8_pumpkin.gif)
 
 
 ## Usage
