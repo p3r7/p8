@@ -40,6 +40,30 @@ end
 
 
 -- -------------------------------------------------------------------------
+-- TIME
+
+curr_time = .0
+
+time_fps = 10
+
+clock.run(
+ function()
+  while curr_time < 32767 do
+   local step_s = 1 / time_fps
+   curr_time = curr_time + step_s
+   clock.sleep(step_s)
+  end
+
+  curr_time = 32767
+end)
+
+
+function t()
+ return curr_time
+end
+
+
+-- -------------------------------------------------------------------------
 -- UTILS
 
 function find_in_table(search_v, t)
