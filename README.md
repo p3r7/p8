@@ -29,6 +29,13 @@ Their display APIs are pretty close to one another.
 On the contrary, _pico-8's_ trigonometric functions behave quite deifferently from the standard Lua `math` lib.
 
 
+## Examples
+
+[ghosts.lua](ghosts.lua) ([original tweetcart](https://twitter.com/Alexis_Lessard/status/1322164958008905728) by [@Alexis_Lessard](https://twitter.com/Alexis_Lessard)).
+
+![norns_p8_ghosts](https://www.eigenbahn.com/assets/gif/norns_p8_ghosts.gif)
+
+
 ## Usage
 
 #### General
@@ -40,7 +47,8 @@ It needs to be slightly adapted:
  - the label / `goto` block needs to be moved to a function (typically `redraw`)
  - this function needs to be called from a `metro` object
 
-A concrete example is given with [ghosts.lua](ghosts.lua) ([original tweetcart](https://twitter.com/Alexis_Lessard/status/1322164958008905728)).
+See the [Examples](#examples) for concrete use-cases.
+
 
 #### print
 
