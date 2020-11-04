@@ -1,7 +1,7 @@
 -- manga-effect.
 --
 -- @kadoyan
--- twitter.com/user/status/1319781601425952768
+-- twitter.com/user/status/1309354303933616131
 --
 -- Ported by @eigen
 
