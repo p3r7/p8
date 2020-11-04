@@ -262,6 +262,7 @@ curr_palette = default_palette
 curr_palette_transparency = default_palette_transparency
 
 function color(col)
+ col = flr(col)
  -- NB: secret colors can only be accessed through `pal`
  curr_color_id = (col % 16)+1
  curr_color = rgb_to_greyscale(curr_palette[curr_color_id])
