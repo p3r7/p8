@@ -26,7 +26,7 @@ To compare them:
 
 Their display APIs are pretty close to one another.
 
-On the contrary, _pico-8's_ trigonometric functions behave quite deifferently from the standard Lua `math` lib.
+On the contrary, _pico-8's_ trigonometric functions behave quite differently from the standard Lua `math` lib.
 
 
 ## Examples
@@ -108,6 +108,6 @@ These might get implemented in a very loose way:
 
 Current implementation of `print` (`p8print`) does not handle `\n` and screen scroll on end of framebuffer.
 
-Current implementation of `peek` and `poke` only support interracting with the current color and current text cursor position.
+Current implementation of `peek` and `poke` only support interacting with the current color and current text cursor position.
 
-Current implementation of `pal` doesn't honour the `p` parameter.
+Current implementation of `pal` doesn't honor the `p` parameter.
