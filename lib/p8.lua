@@ -142,7 +142,13 @@ end
 -- MATH: RANDOMNESS
 
 function rnd(x)
- return math.random(x)
+ local fractional_part = (math.random(99999) / 100000)
+ if not x then
+  x = 0
+ else
+  x = math.random(x - 1)
+ end
+ return x + fractional_part
 end
 
 function srand(x)
