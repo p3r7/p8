@@ -164,7 +164,7 @@ function cos(x)
 end
 
 function sin(x)
- return math.sin(math.rad(x * 360))
+ return -math.sin(math.rad(x * 360))
 end
 
 -- this seems to do the work
