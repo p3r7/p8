@@ -1,19 +1,16 @@
 -- ghosts.
 --
 -- @Alexis_Lessard
--- https://twitter.com/Alexis_Lessard/status/1322164958008905728?s=20
+-- twitter.com/user/status/1322164958008905728
 --
--- Ported by @eigenbahn
+-- Ported by @eigen
 
 
 include('p8/lib/p8')
 
 function init()
-  screen.level(15)
   screen.aa(1)
   screen.line_width(1)
-
-  redraw()
 end
 
 
@@ -24,9 +21,9 @@ n=20
 r=rnd
 
 for i=1,n do
+ -- NB: color/level adjustment for stronger contrast
  -- p[i]={r(k),r(171),1+r(n)/20,5+5*i}
  local col = flr(1+(i-1) * 15 / n)
- print(col)
  p[i]={r(k),r(171),1+r(n)/20,col}
 end
 
@@ -38,10 +35,9 @@ re.event = function()
 end
 re:start()
 
-
-
 function redraw()
- ::_::cls()
+ -- ::_::
+ cls()
  for j=1,n do
   o=p[j]
   h=o[3]*t+j/9x=o[1]+sin(h)*20y=-20+(o[2]-t*99)%171
@@ -51,6 +47,4 @@ function redraw()
   pset(x-2,y,0)pset(x+2,y)end
  flip()
  -- goto _
-
- -- screen.update()
 end
