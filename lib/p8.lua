@@ -3,7 +3,8 @@
 -- -------------------------------------------------------------------------
 -- STATE & MEMORY
 
-curr_color = 6
+curr_color = 0
+curr_color_id = 0
 
 curr_cursor_x = 0
 curr_cursor_y = 0
@@ -17,8 +18,8 @@ function set_current_line_endpoints(x, y)
 end
 
 function invalidate_current_line_endpoints()
- curr_line_endpoint_x = nil
- curr_line_endpoint_y = nil
+  curr_line_endpoint_x = nil
+  curr_line_endpoint_y = nil
 end
 
 function peek(addr)
@@ -48,6 +49,27 @@ function find_in_table(search_v, t)
    return k
   end
  end
+end
+
+function range(a, b, step)
+ if not b then
+  b = a
+  a = 1
+ end
+ step = step or 1
+ local f =
+  step > 0 and
+  function(_, lastvalue)
+   local nextvalue = lastvalue + step
+   if nextvalue <= b then return nextvalue end
+  end or
+  step < 0 and
+  function(_, lastvalue)
+   local nextvalue = lastvalue + step
+   if nextvalue >= b then return nextvalue end
+  end or
+  function(_, lastvalue) return lastvalue end
+ return f, nil, a - step
 end
 
 -- -------------------------------------------------------------------------
@@ -225,20 +247,25 @@ default_palette = {
  { 255, 110,  89 }, -- dark peach     8
  { 255, 157, 129 }, -- peach          10
 }
+default_palette_transparency = {}
+for i in range(#default_palette + 1) do
+ default_palette_transparency[i] = false
+end
 
 curr_palette = default_palette
+curr_palette_transparency = default_palette_transparency
 
 function color(col)
  -- NB: secret colors can only be accessed through `pal`
- local col_id = (col % 16)+1
- curr_color = rgb_to_greyscale(curr_palette[col_id])
+ curr_color_id = (col % 16)+1
+ curr_color = rgb_to_greyscale(curr_palette[curr_color_id])
  screen.level(curr_color)
 end
 
 function color_maybe(col)
-  if col then
-   color(col)
-  end
+ if col then
+  color(col)
+ end
 end
 
 function pal(c0, c1, p)
@@ -246,12 +273,34 @@ function pal(c0, c1, p)
 
  if not c0 then
   curr_palette = default_palette
+  palt() -- reset transparency
  else
   -- print("altering palette")
   c0_id = find_in_table(c0, default_palette_indices)
   c1_id = find_in_table(c1, default_palette_indices)
   curr_palette[c0_id] = curr_palette[c1_id]
  end
+end
+
+function palt(col, t)
+ print("palt - col="..col)
+ local col_id = find_in_table(col, default_palette_indices)
+ print("palt - col_id="..col_id)
+ if not col then
+  curr_palette_transparency = default_palette_transparency
+ else
+  curr_palette_transparency[col_id] = t
+ end
+end
+
+function is_color_transparent(col)
+ local col_id = nil
+ if col then
+  col_id = find_in_table(col, default_palette_indices)
+ else
+  col_id = curr_color_id
+ end
+ return curr_palette_transparency[col_id]
 end
 
 function rgb_to_greyscale(rgb)
@@ -283,7 +332,10 @@ function p8print(str, x, y, col)
  cursor(x, y, col)
 
  -- TODO: handle \n and whole screen scroll on value wrap
- screen.text(str)
+
+ if not is_color_transparent() then
+  screen.text(str)
+ end
 
  curr_cursor_y = curr_cursor_y + 6
  if (curr_cursor_y + 6) >= 128 then
@@ -297,6 +349,9 @@ end
 
 function pset(x, y, col)
  color_maybe(col)
+ if is_color_transparent() then
+  return
+ end
  screen.pixel(x, y)
  screen.fill()
 end
@@ -317,6 +372,10 @@ end
 function line_w_start(x0, y0, x1, y1, col)
  color_maybe(col)
 
+ if is_color_transparent() then
+  return
+ end
+
  screen.move(x0, y0)
  screen.line(x1, y1)
  screen.stroke()
@@ -327,6 +386,10 @@ end
 function line_w_no_start(x1, y1, col)
  color_maybe(col)
 
+ if is_color_transparent() then
+  return
+ end
+
  if curr_line_endpoint_x and curr_line_endpoint_y then
   screen.move(curr_line_endpoint_x, curr_line_endpoint_y)
   screen.line(x1, y1)
@@ -336,30 +399,40 @@ function line_w_no_start(x1, y1, col)
  set_current_line_endpoints(x1, y1)
 end
 
-function circ_impl(x, y, r, col)
+function circ(x, y, r, col)
  color_maybe(col)
+ if is_color_transparent() then
+  return
+ end
  screen.move(x + r, y)
  screen.circle(x, y, r)
-end
-
-function circ(x, y, r, col)
- circ_impl(x, y, r, col)
  screen.stroke()
 end
 
 function circfill(x, y, r, col)
- circ_impl(x, y, r, col)
+ color_maybe(col)
+ if is_color_transparent() then
+  return
+ end
+ screen.move(x + r, y)
+ screen.circle(x, y, r)
  screen.fill()
 end
 
 function rect(x0, y0, x1, y1, col)
  color_maybe(col)
+ if is_color_transparent() then
+  return
+ end
  screen.rect(x0, y0, (x1 - x0), (y1 - y0))
  screen.stroke()
 end
 
 function rectfill(x0, y0, x1, y1, col)
  color_maybe(col)
+ if is_color_transparent() then
+  return
+ end
  screen.rect(x0, y0, (x1 - x0), (y1 - y0))
  screen.fill()
 end

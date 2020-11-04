@@ -84,7 +84,6 @@ The following are not yet here but are the next one on the list:
 - `fillp` (patterned fill)
 - `tline` (textured line)
 - map and table APIs
-- `palt`
 
 These are interesting but seem difficult to implement fully with current _norns_ APIs:
 - `pget`
