@@ -6,6 +6,9 @@
 -- Ported by @eigen
 
 
+-- ------------------------------------------------------------------------
+-- init
+
 include('p8/lib/p8')
 
 function init()
@@ -13,6 +16,17 @@ function init()
   screen.line_width(1)
 end
 
+local fps = 30
+re = metro.init()
+re.time = 1.0 / fps
+re.event = function()
+ redraw()
+end
+re:start()
+
+
+-- ------------------------------------------------------------------------
+-- tweetcart
 
 k=127
 t=0
@@ -27,14 +41,6 @@ for i=1,n do
  p[i]={r(k),r(171),1+r(n)/20,col}
 end
 
-re = metro.init()
-re.time = 1.0 / 30
-re.event = function()
-  t = t + 0.01
-  redraw()
-end
-re:start()
-
 function redraw()
  -- ::_::
  cls()
@@ -46,5 +52,6 @@ function redraw()
   end
   pset(x-2,y,0)pset(x+2,y)end
  flip()
+ t = t + 0.01
  -- goto _
 end

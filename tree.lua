@@ -6,6 +6,9 @@
 -- Ported by @eigen
 
 
+-- ------------------------------------------------------------------------
+-- init
+
 include('p8/lib/p8')
 
 function init()
@@ -13,6 +16,17 @@ function init()
  screen.line_width(1)
 end
 
+local fps = 10
+re = metro.init()
+re.time = 1.0 / fps
+re.event = function()
+ redraw()
+end
+re:start()
+
+
+-- ------------------------------------------------------------------------
+-- tweetcart
 
 function j(l,b,a)
  x,y=b[1],b[2]
@@ -25,13 +39,6 @@ end
 -- t,c,b=0,{11,3,4,132},{64,112}
 t,c,b=0,{11,3,4,132},{64,90}
 
-re = metro.init()
-re.time = 1.0 / 10
-re.event = function()
- t = t + .01
- redraw()
-end
-re:start()
 
 function redraw()
  -- ::z::
@@ -39,5 +46,6 @@ function redraw()
  line(64,128,64,112,132)
  j(20+q*3,b,-3+q)j(22+q*4,b,3+w)
  flip()
+ t = t + .01
  -- goto z
 end
