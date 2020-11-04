@@ -39,6 +39,18 @@ end
 
 
 -- -------------------------------------------------------------------------
+-- UTILS
+
+function find_in_table(search_v, t)
+ local index={}
+ for k, v in pairs(t) do
+  if v == search_v then
+   return k
+  end
+ end
+end
+
+-- -------------------------------------------------------------------------
 -- MATH: BASICS
 
 function sgn(x)
@@ -171,8 +183,14 @@ end
 -- -------------------------------------------------------------------------
 -- SCREEN: COLORS
 
-palette_indices = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
-palette = {
+default_palette_indices = {
+ -- standard
+ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+ -- secret
+ 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143,
+}
+default_palette = {
+ -- standard
  {   0,   0,   0 }, -- black          0
  {  29,  43,  83 }, -- dark-blue      3
  { 126,  37,  83 }, -- dark-purple    4
@@ -189,10 +207,7 @@ palette = {
  { 131, 118, 156 }, -- lavender       7
  { 255, 119, 168 }, -- pink           10
  { 255, 204, 170 }, -- light-peach    12
-}
-
-secret_palette_indices = {128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}
-secret_palette = {
+ -- secret
  {  41,  24,  20 }, -- darkest-grey   1
  {  17,  29,  53 }, -- darker-blue    1
  {  66,  33,  54 }, -- darker-purple  3
@@ -211,14 +226,31 @@ secret_palette = {
  { 255, 157, 129 }, -- peach          10
 }
 
+curr_palette = default_palette
+
 function color(col)
- curr_color = rgb_to_greyscale(palette[(col % 16)+1])
+ -- NB: secret colors can only be accessed through `pal`
+ local col_id = (col % 16)+1
+ curr_color = rgb_to_greyscale(curr_palette[col_id])
  screen.level(curr_color)
 end
 
 function color_maybe(col)
- if col then
-  color(col)
+  if col then
+   color(col)
+  end
+end
+
+function pal(c0, c1, p)
+ -- NB: use-case of p=0 is not clear to me
+
+ if not c0 then
+  curr_palette = default_palette
+ else
+  -- print("altering palette")
+  c0_id = find_in_table(c0, default_palette_indices)
+  c1_id = find_in_table(c1, default_palette_indices)
+  curr_palette[c0_id] = curr_palette[c1_id]
  end
 end
 

@@ -84,10 +84,10 @@ The following are not yet here but are the next one on the list:
 - `fillp` (patterned fill)
 - `tline` (textured line)
 - map and table APIs
+- `palt`
 
-These are interesting but seem difficult to implement with current _norns_ APIs:
+These are interesting but seem difficult to implement fully with current _norns_ APIs:
 - `pget`
-- `pal` / `palt`
 - `clip`
 - `camera`
 
@@ -98,3 +98,5 @@ These might get implemented in a very loose way:
 Current implementation of `print` (`p8print`) does not handle `\n` and screen scroll on end of framebuffer.
 
 Current implementation of `peek` and `poke` only support interracting with the current color and current text cursor position.
+
+Current implementation of `pal` doesn't honour the `p` parameter.
