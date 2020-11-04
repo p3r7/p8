@@ -18,8 +18,8 @@ function set_current_line_endpoints(x, y)
 end
 
 function invalidate_current_line_endpoints()
-  curr_line_endpoint_x = nil
-  curr_line_endpoint_y = nil
+ curr_line_endpoint_x = nil
+ curr_line_endpoint_y = nil
 end
 
 function peek(addr)
@@ -173,14 +173,14 @@ function atan2(dx, dy)
  if dx >= 0 then
   local r = (dx - ay) / (dx + ay)
   a = q - r*q
-  else
-   local r = (dx + ay) / (ay - dx)
-   a = q*3 - r*q
-  end
-  if dy > 0 then
-   a = -a
-  end
-  return a
+ else
+  local r = (dx + ay) / (ay - dx)
+  a = q*3 - r*q
+ end
+ if dy > 0 then
+  a = -a
+ end
+ return a
 end
 
 -- failed attempt
