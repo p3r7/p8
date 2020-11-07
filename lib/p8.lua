@@ -179,7 +179,10 @@ function rnd(x)
 end
 
 function srand(x)
- return math.randomseed(x)
+  if not x then
+    x = 0
+  end
+  math.randomseed(x)
 end
 
 
