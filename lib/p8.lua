@@ -166,13 +166,15 @@ end
 -- MATH: RANDOMNESS
 
 function rnd(x)
- local fractional_part = (math.random(99999) / 100000)
- if not x then
-  x = 0
- else
-  x = math.random(x - 1)
+ if x == 0 then
+   return 0
  end
- return x + fractional_part
+ if (not x) then
+   x = 1
+ end
+ x = x * 100000
+ x = math.random(x) / 100000
+ return x
 end
 
 function srand(x)
