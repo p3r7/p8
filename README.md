@@ -35,7 +35,7 @@ On the contrary, _PICO-8's_ trigonometric functions behave quite differently fro
 
 ![norns_p8_ghosts](https://www.eigenbahn.com/assets/gif/norns_p8_ghosts.gif)
 
-[confetti.lua](confetti.lua) ([original tweetcart](twitter.com/user/status/1324156597569048578) by [@von_rostock](https://twitter.com/von_rostock)).
+[confetti.lua](confetti.lua) ([original tweetcart](https://twitter.com/user/status/1324156597569048578) by [@von_rostock](https://twitter.com/von_rostock)).
 
 ![norns_p8_confetti](https://www.eigenbahn.com/assets/gif/norns_p8_confetti.gif)
 
