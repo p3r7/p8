@@ -228,9 +228,13 @@ end
 -- -------------------------------------------------------------------------
 -- SCREEN: BASICS
 
-function cls()
+function cls(col)
  cursor(0, 0)
- screen.clear()
+ -- screen.clear()
+ if not col then
+  col = 0
+ end
+ rectfill(0, 0, 128, 64, col)
 end
 
 function flip()
