@@ -56,9 +56,9 @@ On the contrary, _PICO-8's_ trigonometric functions behave quite differently fro
 
 #### General
 
-Most _PICO-8_ _tweetcarts_ define a combination of `goto` and `flip`.
+Most _PICO-8_ _tweetcarts_ are not defined using the [game loop](https://pico-8.fandom.com/wiki/GameLoop) but a combination of `goto` and `flip` instead.
 
-It needs to be slightly adapted:
+To be executed on _norns_, they need to be slightly adapted:
 
  - the label / `goto` block needs to be moved to a function (typically `redraw`)
  - this function needs to be called from a `metro` object
