@@ -235,6 +235,7 @@ function cls(col)
   col = 0
  end
  rectfill(0, 0, 128, 64, col)
+ flip()
 end
 
 function flip()
