@@ -297,9 +297,9 @@ curr_palette = default_palette
 curr_palette_transparency = default_palette_transparency
 
 function color(col)
- col = flr(col)
  -- NB: secret colors can only be accessed through `pal`
- curr_color_id = (col % 16)+1
+ col = flr(col % 16)
+ curr_color_id = col + 1
  curr_color = rgb_to_greyscale(curr_palette[curr_color_id])
  screen.level(curr_color)
 end
@@ -310,17 +310,49 @@ function color_maybe(col)
  end
 end
 
+function normalize_col_for_pal(col)
+ col = flr(col)
+
+ if col >= 128 and col <= 143 then
+  -- direct access to secret palette
+  return col
+ elseif col >= -144 and col <= -129 then
+  -- direct access to regular palette with negative value
+  return col % 16
+ end
+
+ local sign = 1
+ if col < 0 then sign = -1 end
+
+ -- NB: negative values are shorthands to the secret palette
+ if sign == -1 then
+  return 128 + 16 + col
+ end
+
+ return col % 16
+end
+
 function pal(c0, c1, p)
  -- NB: use-case of p=0 is not clear to me
 
  if not c0 then
   curr_palette = default_palette
   palt() -- reset transparency
+ elseif type(c0) == "table" then
+  pal_table(c0, c1) -- NB: in that case 2nd arg (c2) acts as p
  else
-  -- print("altering palette")
+  c0 = normalize_col_for_pal(c0)
+  c1 = normalize_col_for_pal(c1)
   c0_id = find_in_table(c0, default_palette_indices)
   c1_id = find_in_table(c1, default_palette_indices)
   curr_palette[c0_id] = curr_palette[c1_id]
+ end
+end
+
+function pal_table(t, p)
+ for in_col, out_col in pairs(t) do
+   print("pal map: "..normalize_col_for_pal(in_col).." -> "..normalize_col_for_pal(out_col))
+   pal(in_col, out_col, p)
  end
 end
 
@@ -336,7 +368,7 @@ end
 function is_color_transparent(col)
  local col_id = nil
  if col then
-  col_id = find_in_table(col, default_palette_indices)
+   col_id = find_in_table(col, default_palette_indices)
  else
   col_id = curr_color_id
  end
