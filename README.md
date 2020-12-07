@@ -105,12 +105,11 @@ Not all of [_PICO-8_ APIs](https://pico-8.fandom.com/wiki/APIReference) will get
 The following are not yet here but are the next one on the list:
 - `fillp` (patterned fill)
 - `tline` (textured line)
-- map and table APIs
 
 These are interesting but seem difficult to implement fully with current _norns_ APIs:
-- `pget`
 - `clip`
 - `camera`
+-  map APIs
 
 These might get implemented in a very loose way:
 - `fset` / `fget`

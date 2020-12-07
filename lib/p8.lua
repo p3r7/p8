@@ -483,6 +483,11 @@ end
 -- -------------------------------------------------------------------------
 -- SCREEN: SHAPES
 
+function pget(x, y)
+ local s = screen.peek(x, y, x+1, y+1)
+ return string.byte(s, 1)
+end
+
 function pset(x, y, col)
  color_maybe(col)
  if is_color_transparent() then
