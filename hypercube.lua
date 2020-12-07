@@ -4,6 +4,20 @@
 -- https://gist.github.com/Ivoah/477775d13e142b2c89ba
 --
 -- Ported by @eigen
+--
+--
+-- K1 held is SHIFT
+--
+-- E1: zoom in/out
+-- E2: camera x axis
+-- E3: camera y axis
+--
+-- SHIFT+K2: toggle multi-axis
+-- SHIFT+E1: rotate x axis
+-- SHIFT+E2: rotate y axis
+-- SHIFT+E3: rotate z axis
+-- K2: toggle auto-rotate
+-- K3: emmergency stop
 
 
 -- ------------------------------------------------------------------------
@@ -82,6 +96,13 @@ cam = {0,0,-4} -- Initilise the camera position
 mult = 64 -- View multiplier
 a = flr(rnd(3))+1 -- Angle for random rotation
 t = flr(rnd(50))+25 -- Time until next angle change
+rot_speed = 0
+rot_speed_a = {0,0,0} -- Independant angle rotation
+
+independant_rot_a = False
+prev_a = nil
+
+random_angle = false
 
 is_shift = false
 
@@ -96,26 +117,82 @@ function key(id,state)
     else
       is_shift = true
     end
+  elseif id == 2 then
+    if state == 0 then
+      if is_shift then
+        independant_rot_a = not independant_rot_a
+        if not independant_rot_a then
+          print("independant angle rotation off")
+          rot_speed = rot_speed_a[1] + rot_speed_a[2] + rot_speed_a[3]
+        else
+          print("independant angle rotation on")
+          rot_speed_a = {0,0,0}
+          rot_speed_a[a] = rot_speed
+        end
+      else
+        random_angle = not random_angle
+        if not random_angle then
+          print("random rotation off")
+          rot_speed = 0
+        else
+          print("random rotation on")
+          independant_rot_a = false
+          rot_speed = 0.01
+        end
+      end
+    end
+  elseif id == 3 then
+    if state == 0 then
+      print("emergency stop!")
+      random_angle = False
+      rot_speed = 0
+      rot_speed_a = {0,0,0}
+    end
   end
 end
 
 
 function enc(id,delta)
   if id == 1 then
-    cam[3] = cam[3] + delta / 5
+    if is_shift then
+      a = 1
+    else
+      cam[3] = cam[3] + delta / 5
+    end
   elseif id == 2 then
     if is_shift then
-      -- tilt_top = util.clamp(tilt_top + delta / 100, 0, 1)
+      a = 2
     else
-      cam[1] = cam[1] + delta / 10
+      cam[1] = cam[1] - delta / 10
     end
  elseif id == 3 then
   if is_shift then
-    -- tilt_bottom = util.clamp(tilt_bottom + delta / 100, 0, 1)
+    a = 3
   else
-    cam[2] = cam[2] + delta / 10
+    cam[2] = cam[2] - delta / 10
   end
  end
+
+  if is_shift then
+    local sign = 1
+    if delta < 0 then
+      sign = -1
+    end
+    if id == 2 then
+      sign = -sign
+    end
+
+    if not independant_rot_a then
+      if prev_a == a then
+        rot_speed = util.clamp(rot_speed + 0.01 * sign, -0.05, 0.05)
+      else
+        rot_speed = 0.01 * sign
+      end
+      prev_a = a
+    else
+      rot_speed_a[a] = util.clamp(rot_speed_a[a] + 0.005 * sign, -0.03, 0.03)
+    end
+  end
 end
 
 
@@ -123,16 +200,27 @@ end
 -- MAIN LOOP
 
 function redraw()
-  t = t - 1 -- Decrease time until next angle change
-  if t <= 0 then -- If t is 0 then change the random angle and restart the timer
-    t = flr(rnd(50))+25 -- Restart timer
-    a = flr(rnd(3))+1 -- Update angle
+  if random_angle then
+    t = t - 1 -- Decrease time until next angle change
+    if t <= 0 then -- If t is 0 then change the random angle and restart the timer
+      t = flr(rnd(50))+25 -- Restart timer
+      a = flr(rnd(3))+1 -- Update angle
+    end
   end
-  cube = rotate_shape(cube,a,0.01)
+
+  if not independant_rot_a then
+    cube = rotate_shape(cube,a,rot_speed)
+  else
+    cube = rotate_shape(cube,1,rot_speed_a[1])
+    cube = rotate_shape(cube,2,rot_speed_a[2])
+    cube = rotate_shape(cube,3,rot_speed_a[3])
+  end
 
 
   cls()
   draw_shape(cube)
+
+  pset(0, 0, 0)
   flip()
 end
 
