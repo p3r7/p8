@@ -21,7 +21,7 @@ The aim is not to have it embedded systematically in a _norns_ app but instead t
 By defining PICO-8 API functions from norns-compatible Lua code ([code](./lib/p8.lua)).
 
 To compare them:
-- [_PICO-8_ API reference](https://pico-8.fandom.com/wiki/APIReference)
+- [_PICO-8_ API reference](https://pico-8.fandom.com/wiki/APIReference), [manual](https://www.lexaloffle.com/pico-8.php?page=manual) (more up to date)
 - [_norns_ API reference](https://monome.org/docs/norns/api/) (look especially at the [screen](https://monome.org/docs/norns/api/classes/screen.html) API)
 
 Their display APIs are pretty close to one another.
@@ -79,14 +79,20 @@ That's why _PICO-8's_ version got renamed `p8print`.
 
 _PICO-8's_ Lua differs a bit from standard Lua.
 
-It notably provides additional constructs such as `+=` and `-=` to increase / decrease values. These instructions should be converted for _norns_ to interpret them.
+It notably provides additional constructs such as a short form if/else ternary syntax and compound assignment operators (e.g. `+=`). These instructions should be converted for _norns_ to interpret them.
+
+Refer to [this page](https://gist.github.com/josefnpat/bfe4aaa5bbb44f572cd0) for more detailed porting instructions.
 
 ```lua
 -- valid PICO-8 Lua
 t += 1
+if (not b) then i=1 j=2 end
+j != 0
 
 -- equivalent Lua
 t = t + 1
+if (not b) then i=1 else j=2 end
+j ~= 0
 ```
 
 There is also the `@<address>` shorthand for `peek` that would need to be converted to an explicit `peek` call.
