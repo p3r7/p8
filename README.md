@@ -115,3 +115,8 @@ Current implementation of `print` (`p8print`) does not handle `\n` and screen sc
 Current implementation of `peek` and `poke` only support interacting with the current color and current text cursor position.
 
 Current implementation of `pal` doesn't honor the `p` parameter.
+
+
+## Implementation details
+
+Table manipulation API functions (`foreach`, `all`, `add`, `del`) stolen from the [picolove](https://github.com/picolove/picolove) project.

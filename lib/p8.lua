@@ -40,6 +40,104 @@ end
 
 
 -- -------------------------------------------------------------------------
+-- UTILS
+
+local function arraylen(t)
+  local len = 0
+  for i, _ in pairs(t) do
+    if type(i) == "number" then
+      len = i
+    end
+  end
+  return len
+end
+
+-- TODO: replace by `tabutil.key`
+function find_in_table(search_v, t)
+  local index={}
+  for k, v in pairs(t) do
+    if v == search_v then
+      return k
+    end
+  end
+end
+
+function range(a, b, step)
+  if not b then
+    b = a
+    a = 1
+  end
+  step = step or 1
+  local f =
+    step > 0 and
+    function(_, lastvalue)
+      local nextvalue = lastvalue + step
+      if nextvalue <= b then return nextvalue end
+    end or
+    step < 0 and
+    function(_, lastvalue)
+      local nextvalue = lastvalue + step
+      if nextvalue >= b then return nextvalue end
+    end or
+    function(_, lastvalue) return lastvalue end
+  return f, nil, a - step
+end
+
+
+-- -------------------------------------------------------------------------
+-- TABLES
+
+function foreach(a, f)
+  if not a then
+    -- warning("foreach got a nil value")
+    return
+  end
+  for _, v in ipairs(a) do
+    f(v)
+  end
+end
+
+function all(a)
+  if a == nil then
+    return function()
+    end
+  end
+
+  local i = 0
+  local n = arraylen(a)
+  return function()
+    i = i + 1
+    while (a[i] == nil and i <= n) do
+      i = i + 1
+    end
+    return a[i]
+  end
+end
+
+function add(a, v)
+  if a == nil then
+    -- warning("add to nil")
+    return
+  end
+  table.insert(a, v)
+  return v
+end
+
+function del(a, dv)
+  if a == nil then
+    -- warning("del from nil")
+    return
+  end
+  for i, v in ipairs(a) do
+    if v == dv then
+      table.remove(a, i)
+      return dv
+    end
+  end
+end
+
+
+-- -------------------------------------------------------------------------
 -- TIME
 
 curr_time = .0
@@ -60,40 +158,6 @@ end)
 
 function t()
  return curr_time
-end
-
-
--- -------------------------------------------------------------------------
--- UTILS
-
-function find_in_table(search_v, t)
- local index={}
- for k, v in pairs(t) do
-  if v == search_v then
-   return k
-  end
- end
-end
-
-function range(a, b, step)
- if not b then
-  b = a
-  a = 1
- end
- step = step or 1
- local f =
-  step > 0 and
-  function(_, lastvalue)
-   local nextvalue = lastvalue + step
-   if nextvalue <= b then return nextvalue end
-  end or
-  step < 0 and
-  function(_, lastvalue)
-   local nextvalue = lastvalue + step
-   if nextvalue >= b then return nextvalue end
-  end or
-  function(_, lastvalue) return lastvalue end
- return f, nil, a - step
 end
 
 
