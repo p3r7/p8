@@ -31,13 +31,18 @@ function init()
 end
 
 local fps = 30
-re = metro.init()
-re.time = 1.0 / fps
-re.event = function()
- redraw()
-end
-re:start()
+redraw_clock = clock.run(
+  function()
+    local step_s = 1 / fps
+    while true do
+      clock.sleep(step_s)
+      redraw()
+    end
+end)
 
+function cleanup()
+  clock.cancel(redraw_clock)
+end
 
 -- ------------------------------------------------------------------------
 -- cart init
