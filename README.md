@@ -124,4 +124,4 @@ Current implementation of `pal` doesn't honor the `p` parameter.
 
 ## Implementation details
 
-Table manipulation API functions (`foreach`, `all`, `add`, `del`) stolen from the [picolove](https://github.com/picolove/picolove) project.
+Table manipulation API functions (`foreach`, `all`, `add`, `del`) stolen from the [picolove](https://github.com/picolove/picolove) project ([BBS thread](https://www.lexaloffle.com/bbs/?tid=2444)).
