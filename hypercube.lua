@@ -221,11 +221,9 @@ function redraw()
     cube = rotate_shape(cube,3,rot_speed_a[3])
   end
 
-
   cls()
   draw_shape(cube)
 
-  pset(0, 0, 0)
   flip()
 end
 
