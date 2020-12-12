@@ -294,12 +294,10 @@ end
 
 function cls(col)
  cursor(0, 0)
- -- screen.clear()
  if not col then
-  col = 0
+   col = 0
  end
  rectfill(0, 0, 128, 64, col)
- flip()
 end
 
 function flip()
