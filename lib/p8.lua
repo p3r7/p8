@@ -203,6 +203,9 @@ end
 -- @param y second number
 -- @param z thirs number
 function mid(x, y, z)
+  x = flr(x)
+  y = flr(y)
+  z = flr(z)
   mx = max(max(x, y), z)
   mn = min(min(x ,y), z)
   return x ~ y ~ z ~ mx ~ mn
@@ -231,6 +234,9 @@ end
 --- Compute the square root
 -- @param x number
 function sqrt(x)
+  if x < 0 then
+    return 0
+  end
   return math.sqrt(x)
 end
 
@@ -238,6 +244,16 @@ end
 -- @param x number
 function flr(x)
   return math.floor(x)
+end
+
+--- Round value
+-- @param x number
+-- @param numDecimalPlaces precision
+-- NB: not in standard PICO-8 API
+-- but PICO-8 seems to `round` (instead of `floor`) some params in some cases
+function round(x, numDecimalPlaces)
+  local mult = 10^(numDecimalPlaces or 0)
+  return math.floor(x * mult + 0.5) / mult
 end
 
 
@@ -582,7 +598,12 @@ end
 -- @param x position on the X axis
 -- @param y position on the Y axis
 function pget(x, y)
+  x = round(x)
+  y = round(y)
   local s = screen.peek(x, y, x+1, y+1)
+  if s == nil then
+    return 0
+  end
   return string.byte(s, 1)
 end
 
