@@ -4,6 +4,12 @@ Compatibility layer to run [_PICO-8_](https://www.lexaloffle.com/pico-8.php) scr
 
 This is not suitable for running full-fledged carts (with sprites, sound...), targeting instead [_tweetcarts_](https://twitter.com/hashtag/tweetcart?lang=en) (code fitting in a tweet).
 
+[_norns.community_ page (wiki)](https://norns.community/authors/eigen/p8)
+
+[_lines_ page (forum)](https://llllllll.co/t/p8-pico-8-wrapper-lib/37947)
+
+[blog post](https://www.eigenbahn.com/2021/05/10/norns-community)
+
 
 ## Why?
 
