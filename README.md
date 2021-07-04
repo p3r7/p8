@@ -27,7 +27,7 @@ The aim is not to have it embedded systematically in a _norns_ app but instead t
 By defining PICO-8 API functions from norns-compatible Lua code ([code](./lib/p8.lua)).
 
 To compare them:
-- [_PICO-8_ API reference](https://pico-8.fandom.com/wiki/APIReference), [manual](https://www.lexaloffle.com/pico-8.php?page=manual) (more up to date)
+- [_PICO-8_ API reference](https://pico-8.fandom.com/wiki/APIReference), [manual](https://www.lexaloffle.com/pico-8.php?page=manual) (most up to date), [cheatsheet](https://iiviigames.github.io/pico8-api/)
 - [_norns_ API reference](https://monome.org/docs/norns/api/) (look especially at the [screen](https://monome.org/docs/norns/api/classes/screen.html) API)
 
 Their display APIs are pretty close to one another.
