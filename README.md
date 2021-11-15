@@ -57,7 +57,7 @@ On the contrary, _PICO-8's_ trigonometric functions behave quite differently fro
 
 ![norns_p8_pumpkin](https://www.eigenbahn.com/assets/gif/norns_p8_pumpkin.gif)
 
-[cube.lua](tree.lua) ([original code](https://gist.github.com/neauoire/200d97396805dda71154) by [@neauoire of 100 rabbits](https://twitter.com/hundredrabbits)).
+[cube.lua](cube.lua) ([original code](https://gist.github.com/neauoire/200d97396805dda71154) by [@neauoire of 100 rabbits](https://twitter.com/hundredrabbits)).
 
 ![norns_p8_cube](https://www.eigenbahn.com/assets/gif/norns_p8_cube.gif)
 
