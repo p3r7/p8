@@ -310,7 +310,7 @@ function rnd(x)
   if (not x) then
     x = 1
   end
-  x = x * 100000
+  x = math.floor(x * 100000)
   x = math.random(x) / 100000
   return x
 end
