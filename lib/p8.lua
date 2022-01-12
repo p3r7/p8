@@ -215,6 +215,9 @@ end
 -- @param x first number
 -- @param y second number
 function min(x, y)
+  if y == nil then
+    y = 0
+  end
   return math.min(x, y)
 end
 
