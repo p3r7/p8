@@ -222,6 +222,9 @@ end
 -- @param x first number
 -- @param y second number
 function max(x, y)
+  if y == nil then
+    y = 0
+  end
   return math.max(x, y)
 end
 
