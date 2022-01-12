@@ -3,7 +3,7 @@
 -- @jamesedge
 -- https://www.lexaloffle.com/bbs/?tid=36182
 --
--- Ported by @eigen
+-- ported by @eigen
 
 
 -- ------------------------------------------------------------------------

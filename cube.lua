@@ -3,7 +3,7 @@
 -- @neauoire
 -- https://gist.github.com/neauoire/200d97396805dda71154
 --
--- Ported by @eigen
+-- ported by @eigen
 
 
 -- ------------------------------------------------------------------------

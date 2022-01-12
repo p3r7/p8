@@ -3,7 +3,7 @@
 -- @Ivoah
 -- https://gist.github.com/Ivoah/477775d13e142b2c89ba
 --
--- Ported by @eigen
+-- ported by @eigen
 --
 --
 -- K1 held is SHIFT
